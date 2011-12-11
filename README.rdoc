@@ -1,0 +1,55 @@
+= ruby-american_date
+
+ruby-american_date exists to make ruby versions greater than 1.8
+parse american-style month/day/year dates correctly, just like
+ruby 1.8.  It can also be used on ruby 1.8, but it is basically a
+noop there.
+
+As far as I know, there isn't a gem that already handles this. You
+can find many snippets on the web that partially solve the issue, but
+most won't be compatible with ruby 1.9.3, because Date.parse and
+DateTime.parse no longer call Date._parse directly on 1.9.3. Also
+most don't handle cases where an american date format is used in
+addition to a time format.
+
+== Design
+
+The general idea is fairly simple.  We just check the beginning of
+the input string for an american date format, and transform it into
+a year-month-day ISO format before passing it to the standard date
+parsing methods.  This is probably the least invasive way that works
+correctly on both the pure-ruby date parser (<1.9.3) and the C
+extension date parser (>=1.9.3).
+
+To reduce the possibility of problems, only the beginning of the
+input string is checked.  So if you have an american date format
+embedded in the middle of the input string, it won't be translated.
+That may change in the future if it is determined to be safe.
+
+== Tested ruby versions
+
+* ruby 1.8.6, 1.8.7, 1.9.2, 1.9.3
+* rubinius 1.2.4
+* jruby 1.6.5 (both --1.8 and --1.9 modes)
+
+== Installation
+   
+ruby-american_date is distributed as a gem, and can be installed with:
+
+  gem install american_date
+
+== Source
+
+ruby-american_date is hosted on GitHub:
+
+  https://github.com/jeremyevans/ruby-american_date
+
+== Issues
+
+ruby-american_date uses GitHub Issues for issue tracking:
+
+  https://github.com/jeremyevans/ruby-american_date/issues
+
+== Author
+
+Jeremy Evans <code@jeremyevans.net>
