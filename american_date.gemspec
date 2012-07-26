@@ -1,4 +1,4 @@
-AMERICAN_DATE_GEMSPEC = Gem::Specification.new do |s|
+Gem::Specification.new do |s|
   s.name = 'american_date'
   s.version = '1.0.0'
   s.platform = Gem::Platform::RUBY
@@ -11,4 +11,9 @@ AMERICAN_DATE_GEMSPEC = Gem::Specification.new do |s|
   s.email = "code@jeremyevans.net"
   s.homepage = "https://github.com/jeremyevans/ruby-american_date"
   s.files = %w(MIT-LICENSE CHANGELOG README.rdoc Rakefile) + Dir["{spec,lib}/american_date*.rb"]
+
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'rdoc'
+  s.add_development_dependency 'debugger'
 end
