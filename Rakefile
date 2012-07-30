@@ -38,6 +38,6 @@ task :default=>[:spec]
 
 desc "Package american_date"
 task :gem=>[:clean] do
-  load './american_date.gemspec'
-  Gem::Builder.new(AMERICAN_DATE_GEMSPEC).build
+  spec = Gem::Specification.load('./american_date.gemspec')
+  Gem::Builder.new(spec).build
 end
