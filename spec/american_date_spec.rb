@@ -26,6 +26,10 @@ describe "Date.parse" do
   specify "should ignore preceding whitespace" do
     Date.parse('  01/02/2003').should == Date.new(2003, 1, 2)
   end
+
+  specify "should handle arbitrary delimiters" do
+    Date.parse('01-02-2003').should == Date.new(2003, 1, 2)
+  end
 end
 
 describe "DateTime.parse" do
@@ -57,6 +61,10 @@ describe "DateTime.parse" do
   specify "should work with times" do
     DateTime.parse('01/02/2003 10:20:30').should == DateTime.new(2003, 1, 2, 10, 20, 30)
   end
+
+  specify "should handle arbitrary delimiters" do
+    Date.parse('01-02-2003').should == Date.new(2003, 1, 2)
+  end
 end
 
 describe "Time.parse" do
@@ -86,6 +94,10 @@ describe "Time.parse" do
 
   specify "should work with times" do
     Time.parse('01/02/2003 10:20:30').should == Time.local(2003, 1, 2, 10, 20, 30)
+  end
+
+  specify "should handle arbitrary delimiters" do
+    Date.parse('01-02-2003').should == Date.new(2003, 1, 2)
   end
 end
 
@@ -117,5 +129,9 @@ describe "Date._parse" do
 
   specify "should work with times" do
     DateTime._parse('01/02/2003 10:20:30').should == {:year=>2003, :mon=>1, :mday=>2, :hour=>10, :min=>20, :sec=>30}
+  end
+
+  specify "should handle arbitrary delimiters" do
+    Date.parse('01-02-2003').should == Date.new(2003, 1, 2)
   end
 end
