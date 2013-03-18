@@ -4,7 +4,7 @@ if RUBY_VERSION >= '1.9'
   # Modify parsing methods to handle american date format correctly.
   class << Date
     # American date format detected by the library.
-    AMERICAN_DATE_RE = %r_\b(\d{1,2})/(\d{1,2})/(\d{4}|\d{2})\b_.freeze
+    AMERICAN_DATE_RE = %r_(\d{1,2})/(\d{1,2})/(\d{4}|\d{2})_.freeze
 
     # Alias for stdlib Date._parse
     alias _parse_without_american_date _parse

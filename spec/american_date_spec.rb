@@ -30,6 +30,10 @@ describe "Date.parse" do
   specify "should ignore preceding weekday" do
     Date.parse('Day 01/02/2003').should == Date.new(2003, 1, 2)
   end
+
+  specify "should work just like 1.8 does" do
+    Date.parse('10:20:30something01/02/2003else').should == Date.new(2003, 1, 2)
+  end
 end
 
 describe "DateTime.parse" do
@@ -69,6 +73,11 @@ describe "DateTime.parse" do
   specify "should work with times and weekdays" do
     DateTime.parse('Day 01/02/2003 10:20:30').should == DateTime.new(2003, 1, 2, 10, 20, 30)
   end
+
+  specify "should work just like 1.8 does" do
+    DateTime.parse('10:20:30something01/02/2003else').should == DateTime.new(2003, 1, 2, 10, 20, 30)
+  end
+
 end
 
 describe "Time.parse" do
@@ -114,6 +123,10 @@ describe "Time.parse" do
 
   specify "should work with time first and date second and weekday in the middle" do
     Time.parse('10:20:30 Thu 01/02/2003').should == Time.local(2003, 1, 2, 10, 20, 30)
+  end
+
+  specify "should work just like 1.8 does" do
+    Time.parse('10:20:30something01/02/2003else').should == Time.local(2003, 1, 2, 10, 20, 30)
   end
 end
 
