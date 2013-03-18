@@ -26,6 +26,10 @@ describe "Date.parse" do
   specify "should ignore preceding whitespace" do
     Date.parse('  01/02/2003').should == Date.new(2003, 1, 2)
   end
+
+  specify "should ignore preceding weekday" do
+    Date.parse('Day 01/02/2003').should == Date.new(2003, 1, 2)
+  end
 end
 
 describe "DateTime.parse" do
@@ -54,8 +58,16 @@ describe "DateTime.parse" do
     DateTime.parse('  01/02/2003').should == DateTime.new(2003, 1, 2)
   end
 
+  specify "should ignore preceding weekday" do
+    DateTime.parse('Day 01/02/2003').should == Date.new(2003, 1, 2)
+  end
+
   specify "should work with times" do
     DateTime.parse('01/02/2003 10:20:30').should == DateTime.new(2003, 1, 2, 10, 20, 30)
+  end
+
+  specify "should work with times and weekdays" do
+    DateTime.parse('Day 01/02/2003 10:20:30').should == DateTime.new(2003, 1, 2, 10, 20, 30)
   end
 end
 
@@ -84,8 +96,24 @@ describe "Time.parse" do
     Time.parse('  01/02/2003').should == Time.local(2003, 1, 2)
   end
 
+  specify "should ignore preceding weekdays" do
+    Time.parse('Day 01/02/2003').should == Time.local(2003, 1, 2)
+  end
+
   specify "should work with times" do
     Time.parse('01/02/2003 10:20:30').should == Time.local(2003, 1, 2, 10, 20, 30)
+  end
+
+  specify "should work with times and weekdays" do
+    Time.parse('Day 01/02/2003 10:20:30').should == Time.local(2003, 1, 2, 10, 20, 30)
+  end
+
+  specify "should work with time first and date second" do
+    Time.parse('10:20:30 01/02/2003').should == Time.local(2003, 1, 2, 10, 20, 30)
+  end
+
+  specify "should work with time first and date second and weekday in the middle" do
+    Time.parse('10:20:30 Thu 01/02/2003').should == Time.local(2003, 1, 2, 10, 20, 30)
   end
 end
 
