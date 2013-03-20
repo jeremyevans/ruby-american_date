@@ -20,7 +20,7 @@ if RUBY_VERSION >= '1.9'
 
       # Transform american dates into ISO dates before parsing.
       def parse(string, comp=true)
-        parse_without_american_date(convert_american_to_iso(string), comp)
+        parse_without_american_date(convert_american_to_iso(string), comp) unless string.nil?
       end
     end
 
@@ -28,7 +28,7 @@ if RUBY_VERSION >= '1.9'
 
     # Transform american date fromat into ISO format.
     def convert_american_to_iso(string)
-      string.sub(AMERICAN_DATE_RE){|m| "#$3-#$1-#$2"}
+      string.sub(AMERICAN_DATE_RE){|m| "#$3-#$1-#$2"} unless string.nil?
     end
   end
 
