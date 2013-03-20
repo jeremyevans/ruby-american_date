@@ -26,6 +26,26 @@ describe "Date.parse" do
   specify "should ignore preceding whitespace" do
     Date.parse('  01/02/2003').should == Date.new(2003, 1, 2)
   end
+
+  if RUBY_VERSION > '1.9'
+    specify "should raise TypeError for invalid values" do
+      [nil, 1, 1.0, [], {}].each do |x|
+        proc{Date.parse(x)}.should raise_error(TypeError)
+      end
+    end
+
+    specify "should handle values implicitly convertible to String" do
+      o = Object.new
+      def o.to_str() '01/02/2003' end
+      Date.parse(o).should == Date.new(2003, 1, 2)
+    end
+
+    specify "should handle values implicitly convertible to String" do
+      o = Object.new
+      def o.to_str() 1 end
+      proc{Date.parse(o)}.should raise_error(TypeError)
+    end
+  end
 end
 
 describe "DateTime.parse" do
@@ -57,6 +77,26 @@ describe "DateTime.parse" do
   specify "should work with times" do
     DateTime.parse('01/02/2003 10:20:30').should == DateTime.new(2003, 1, 2, 10, 20, 30)
   end
+
+  if RUBY_VERSION > '1.9'
+    specify "should raise TypeError for invalid values" do
+      [nil, 1, 1.0, [], {}].each do |x|
+        proc{DateTime.parse(x)}.should raise_error(TypeError)
+      end
+    end
+
+    specify "should handle values implicitly convertible to String" do
+      o = Object.new
+      def o.to_str() '01/02/2003' end
+      DateTime.parse(o).should == DateTime.new(2003, 1, 2)
+    end
+
+    specify "should handle values implicitly convertible to String" do
+      o = Object.new
+      def o.to_str() 1 end
+      proc{DateTime.parse(o)}.should raise_error(TypeError)
+    end
+  end
 end
 
 describe "Time.parse" do
@@ -86,6 +126,26 @@ describe "Time.parse" do
 
   specify "should work with times" do
     Time.parse('01/02/2003 10:20:30').should == Time.local(2003, 1, 2, 10, 20, 30)
+  end
+
+  if RUBY_VERSION > '1.9'
+    specify "should raise TypeError for invalid values" do
+      [nil, 1, 1.0, [], {}].each do |x|
+        proc{Time.parse(x)}.should raise_error(TypeError)
+      end
+    end
+
+    specify "should handle values implicitly convertible to String" do
+      o = Object.new
+      def o.to_str() '01/02/2003' end
+      Time.parse(o).should == Time.local(2003, 1, 2)
+    end
+
+    specify "should handle values implicitly convertible to String" do
+      o = Object.new
+      def o.to_str() 1 end
+      proc{Time.parse(o)}.should raise_error(TypeError)
+    end
   end
 end
 
@@ -117,5 +177,25 @@ describe "Date._parse" do
 
   specify "should work with times" do
     DateTime._parse('01/02/2003 10:20:30').should == {:year=>2003, :mon=>1, :mday=>2, :hour=>10, :min=>20, :sec=>30}
+  end
+
+  if RUBY_VERSION > '1.9'
+    specify "should raise TypeError for invalid values" do
+      [nil, 1, 1.0, [], {}].each do |x|
+        proc{DateTime._parse(x)}.should raise_error(TypeError)
+      end
+    end
+
+    specify "should handle values implicitly convertible to String" do
+      o = Object.new
+      def o.to_str() '01/02/2003' end
+      DateTime._parse(o).should == {:year=>2003, :mon=>1, :mday=>2}
+    end
+
+    specify "should handle values implicitly convertible to String" do
+      o = Object.new
+      def o.to_str() 1 end
+      proc{DateTime._parse(o)}.should raise_error(TypeError)
+    end
   end
 end

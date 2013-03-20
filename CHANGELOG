@@ -1,3 +1,7 @@
+=== HEAD
+
+* Raise TypeError if passed object not implicitly convertible to String (jeremyevans) (#6)
+
 === 1.0.0 (2011-12-12)
 
 * Initial public release

@@ -28,6 +28,17 @@ if RUBY_VERSION >= '1.9'
 
     # Transform american date fromat into ISO format.
     def convert_american_to_iso(string)
+      unless string.is_a?(String)
+        if string.respond_to?(:to_str)
+          str = string.to_str
+          unless str.is_a?(String)
+            raise TypeError, "no implicit conversion of #{string.inspect} into String"
+          end
+          string = str
+        else
+          raise TypeError, "no implicit conversion of #{string.inspect} into String"
+        end
+      end
       string.sub(AMERICAN_DATE_RE){|m| "#$3-#$1-#$2"}
     end
   end
