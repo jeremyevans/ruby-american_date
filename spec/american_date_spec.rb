@@ -34,6 +34,10 @@ describe "Date.parse" do
   specify "should work just like 1.8 does" do
     Date.parse('10:20:30something01/02/2003else').should == Date.new(2003, 1, 2)
   end
+
+  specify "should not mismatch years" do
+    Date.parse('2003/01/02').should == Date.new(2003, 1, 2)
+  end
 end
 
 describe "DateTime.parse" do
@@ -78,6 +82,9 @@ describe "DateTime.parse" do
     DateTime.parse('10:20:30something01/02/2003else').should == DateTime.new(2003, 1, 2, 10, 20, 30)
   end
 
+  specify "should not mismatch years" do
+    DateTime.parse('2003/01/02').should == Date.new(2003, 1, 2)
+  end
 end
 
 describe "Time.parse" do
@@ -127,6 +134,10 @@ describe "Time.parse" do
 
   specify "should work just like 1.8 does" do
     Time.parse('10:20:30something01/02/2003else').should == Time.local(2003, 1, 2, 10, 20, 30)
+  end
+
+  specify "should not mismatch years" do
+    Time.parse('2003/01/02').should == Time.local(2003, 1, 2, 0, 0, 0)
   end
 end
 
