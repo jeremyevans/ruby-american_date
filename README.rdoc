@@ -28,7 +28,7 @@ That may change in the future if it is determined to be safe.
 
 == Tested ruby versions
 
-* ruby 1.8.6, 1.8.7, 1.9.2, 1.9.3
+* ruby 1.8.6, 1.8.7, 1.9.2, 1.9.3, 2.0.0
 * rubinius 1.2.4
 * jruby 1.6.5 (both --1.8 and --1.9 modes)
 
