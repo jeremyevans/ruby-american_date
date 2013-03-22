@@ -38,6 +38,12 @@ describe "Date.parse" do
   specify "should not mismatch years" do
     Date.parse('2003/01/02').should == Date.new(2003, 1, 2)
   end
+
+  specify "should behave like 1.8 and only allow / as delimiters in american-style dates" do
+    Date.parse("10/11/2012").should == Date.new(2012, 10, 11)
+    Date.parse("10-11-2012").should == Date.new(2012, 11, 10)
+    Date.parse("10.11.2012").should == Date.new(2012, 11, 10)
+  end
 end
 
 describe "DateTime.parse" do
