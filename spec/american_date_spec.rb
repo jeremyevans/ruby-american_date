@@ -27,6 +27,24 @@ describe "Date.parse" do
     Date.parse('  01/02/2003').should == Date.new(2003, 1, 2)
   end
 
+  specify "should ignore preceding weekday" do
+    Date.parse('Day 01/02/2003').should == Date.new(2003, 1, 2)
+  end
+
+  specify "should work just like 1.8 does" do
+    Date.parse('10:20:30something01/02/2003else').should == Date.new(2003, 1, 2)
+  end
+
+  specify "should not mismatch years" do
+    Date.parse('2003/01/02').should == Date.new(2003, 1, 2)
+  end
+
+  specify "should behave like 1.8 and only allow / as delimiters in american-style dates" do
+    Date.parse("10/11/2012").should == Date.new(2012, 10, 11)
+    Date.parse("10-11-2012").should == Date.new(2012, 11, 10)
+    Date.parse("10.11.2012").should == Date.new(2012, 11, 10)
+  end
+
   if RUBY_VERSION > '1.9'
     specify "should raise TypeError for invalid values" do
       [nil, 1, 1.0, [], {}].each do |x|
@@ -74,8 +92,24 @@ describe "DateTime.parse" do
     DateTime.parse('  01/02/2003').should == DateTime.new(2003, 1, 2)
   end
 
+  specify "should ignore preceding weekday" do
+    DateTime.parse('Day 01/02/2003').should == Date.new(2003, 1, 2)
+  end
+
   specify "should work with times" do
     DateTime.parse('01/02/2003 10:20:30').should == DateTime.new(2003, 1, 2, 10, 20, 30)
+  end
+
+  specify "should work with times and weekdays" do
+    DateTime.parse('Day 01/02/2003 10:20:30').should == DateTime.new(2003, 1, 2, 10, 20, 30)
+  end
+
+  specify "should work just like 1.8 does" do
+    DateTime.parse('10:20:30something01/02/2003else').should == DateTime.new(2003, 1, 2, 10, 20, 30)
+  end
+
+  specify "should not mismatch years" do
+    DateTime.parse('2003/01/02').should == Date.new(2003, 1, 2)
   end
 
   if RUBY_VERSION > '1.9'
@@ -124,8 +158,32 @@ describe "Time.parse" do
     Time.parse('  01/02/2003').should == Time.local(2003, 1, 2)
   end
 
+  specify "should ignore preceding weekdays" do
+    Time.parse('Day 01/02/2003').should == Time.local(2003, 1, 2)
+  end
+
   specify "should work with times" do
     Time.parse('01/02/2003 10:20:30').should == Time.local(2003, 1, 2, 10, 20, 30)
+  end
+
+  specify "should work with times and weekdays" do
+    Time.parse('Day 01/02/2003 10:20:30').should == Time.local(2003, 1, 2, 10, 20, 30)
+  end
+
+  specify "should work with time first and date second" do
+    Time.parse('10:20:30 01/02/2003').should == Time.local(2003, 1, 2, 10, 20, 30)
+  end
+
+  specify "should work with time first and date second and weekday in the middle" do
+    Time.parse('10:20:30 Thu 01/02/2003').should == Time.local(2003, 1, 2, 10, 20, 30)
+  end
+
+  specify "should work just like 1.8 does" do
+    Time.parse('10:20:30something01/02/2003else').should == Time.local(2003, 1, 2, 10, 20, 30)
+  end
+
+  specify "should not mismatch years" do
+    Time.parse('2003/01/02').should == Time.local(2003, 1, 2, 0, 0, 0)
   end
 
   if RUBY_VERSION > '1.9'
