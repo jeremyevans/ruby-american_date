@@ -1,9 +1,9 @@
 = ruby-american_date
 
-ruby-american_date exists to make ruby versions greater than 1.8
-parse american-style month/day/year dates correctly, just like
-ruby 1.8.  It can also be used on ruby 1.8, but it is basically a
-noop there.
+ruby-american_date exists to make ruby 1.9+ parse american-style
+month/day/year dates correctly, with behavior matching ruby 1.8.7.
+It can also be used on earlier ruby version, but it is basically
+a noop there.
 
 As far as I know, there isn't a gem that already handles this. You
 can find many snippets on the web that partially solve the issue, but
@@ -12,19 +12,17 @@ DateTime.parse no longer call Date._parse directly on 1.9.3. Also
 most don't handle cases where an american date format is used in
 addition to a time format.
 
+Note that this gem only handles / separated dates.  It does not
+handle - or . separated dates.  This is by design.
+
 == Design
 
-The general idea is fairly simple.  We just check the beginning of
-the input string for an american date format, and transform it into
-a year-month-day ISO format before passing it to the standard date
-parsing methods.  This is probably the least invasive way that works
-correctly on both the pure-ruby date parser (<1.9.3) and the C
-extension date parser (>=1.9.3).
-
-To reduce the possibility of problems, only the beginning of the
-input string is checked.  So if you have an american date format
-embedded in the middle of the input string, it won't be translated.
-That may change in the future if it is determined to be safe.
+The general idea is fairly simple.  We look for a month/day/year
+substring in the input string, and if we find it, we transform it
+into a year-month-day ISO format string before passing it to the
+standard date parsing methods.  This is probably the least invasive
+way that works correctly on both the pure-ruby date parser (<1.9.3)
+and the C extension date parser (>=1.9.3).
 
 == Tested ruby versions
 
