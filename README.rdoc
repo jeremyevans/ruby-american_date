@@ -1,5 +1,8 @@
 = ruby-american_date
 
+{<img src="https://travis-ci.org/jeremyevans/ruby-american_date.png" />[https://travis-ci.org/jeremyevans/ruby-american_date]
+{<img src="https://codeclimate.com/github/jeremyevans/ruby-american_date.png" />}[https://codeclimate.com/github/jeremyevans/ruby-american_date]
+
 ruby-american_date exists to make ruby 1.9+ parse american-style
 month/day/year dates correctly, with behavior matching ruby 1.8.7.
 It can also be used on earlier ruby version, but it is basically
@@ -26,12 +29,12 @@ and the C extension date parser (>=1.9.3).
 
 == Tested ruby versions
 
-* ruby 1.8.6, 1.8.7, 1.9.2, 1.9.3, 2.0.0
-* rubinius 1.2.4
-* jruby 1.6.5 (both --1.8 and --1.9 modes)
+* ruby 1.8.6, 1.8.7, 1.9.2, 1.9.3, 2.0.0, 2.1.0
+* rubinius 1.2.4, 2.2.6
+* jruby 1.6.5, 1.7.9 (both --1.8 and --1.9 modes)
 
 == Installation
-   
+
 ruby-american_date is distributed as a gem, and can be installed with:
 
   gem install american_date
