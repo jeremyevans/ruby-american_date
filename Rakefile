@@ -9,14 +9,19 @@ rdoc_task_class = begin
   RDOC_OPTS.concat(['-f', 'hanna'])
   RDoc::Task
 rescue LoadError
-  require "rake/rdoctask"
-  Rake::RDocTask
+  begin
+    require "rake/rdoctask"
+    Rake::RDocTask
+  rescue RuntimeError
+  end
 end
 
-rdoc_task_class.new do |rdoc|
-  rdoc.rdoc_dir = "rdoc"
-  rdoc.options += RDOC_OPTS
-  rdoc.rdoc_files.add %w"lib/american_date.rb MIT-LICENSE CHANGELOG README.rdoc"
+if rdoc_task_class
+  rdoc_task_class.new do |rdoc|
+    rdoc.rdoc_dir = "rdoc"
+    rdoc.options += RDOC_OPTS
+    rdoc.rdoc_files.add %w"lib/american_date.rb MIT-LICENSE CHANGELOG README.rdoc"
+  end
 end
 
 begin
