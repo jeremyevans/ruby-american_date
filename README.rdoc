@@ -13,7 +13,8 @@ most don't handle cases where an american date format is used in
 addition to a time format.
 
 Note that this gem only handles / separated dates.  It does not
-handle - or . separated dates.  This is by design.
+handle - or . separated dates.  This is by design, for compatibility
+with ruby 1.8.7.
 
 == Design
 
