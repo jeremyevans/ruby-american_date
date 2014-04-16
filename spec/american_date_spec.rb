@@ -208,6 +208,10 @@ describe "Time.parse" do
 end
 
 describe "Date._parse" do
+  specify "should correctly parse dd/mm/yy" do
+    Date._parse('18/02/2003', true).should == {:year=>2003, :mon=>2, :mday=>18}
+  end
+
   specify "should use american date format for dd/mm/yy" do
     Date._parse('01/02/03', true).should == {:year=>2003, :mon=>1, :mday=>2}
   end

@@ -29,6 +29,10 @@ if RUBY_VERSION >= '1.9'
 
     private
 
+    def valid_month?(month_string)
+      month_string.to_i <= 12
+    end
+
     # Transform american date fromat into ISO format.
     def convert_american_to_iso(string)
       unless string.is_a?(String)
@@ -42,7 +46,7 @@ if RUBY_VERSION >= '1.9'
           raise TypeError, "no implicit conversion of #{string.inspect} into String"
         end
       end
-      string.sub(AMERICAN_DATE_RE){|m| "#$3-#$1-#$2"}
+      string.sub(AMERICAN_DATE_RE){|m| valid_month?($1) ? "#$3-#$1-#$2" : "#$1/#$2/#$3"}
     end
   end
 
