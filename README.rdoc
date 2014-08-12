@@ -41,7 +41,7 @@ For Rails users, you can also just add to your gemfile:
 
   gem 'american_date'
  
-Then run `bundle` from the command line.
+Then run <code>bundle</code> from the command line.
   
 == Usage for Rails users
 
