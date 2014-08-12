@@ -36,6 +36,19 @@ and the C extension date parser (>=1.9.3).
 ruby-american_date is distributed as a gem, and can be installed with:
 
   gem install american_date
+  
+For Rails users, you can also just add to your gemfile:
+
+  gem 'american_date'
+ 
+Then run `bundle` from the command line.
+  
+== Usage for Rails users
+
+ruby-american_date works "behind the scenes" to find month/day/year 
+substrings in places like form fields. Once the gem
+is installed, you'll be good to go. No more formatting with JavaScript,
+messing with hidden fields or using private methods to adjust your values.
 
 == Source
 
