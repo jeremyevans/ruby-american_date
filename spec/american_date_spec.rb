@@ -135,11 +135,11 @@ end
 
 describe "Time.parse" do
   specify "should use american date format for dd/mm/yy" do
-    Time.parse('01/02/03', true).should == Time.local(2003, 1, 2)
+    Time.parse('01/02/03').should == Time.local(2003, 1, 2)
   end
 
   specify "should use american date format for d/m/yy" do
-    Time.parse('1/2/03', true).should == Time.local(2003, 1, 2)
+    Time.parse('1/2/03').should == Time.local(2003, 1, 2)
   end
 
   specify "should use american date format for dd/mm/yyyy" do
