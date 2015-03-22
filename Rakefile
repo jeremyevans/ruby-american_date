@@ -25,15 +25,18 @@ if rdoc_task_class
 end
 
 begin
-  require "spec/rake/spectask"
-  spec_class = Spec::Rake::SpecTask
-  spec_files_meth = :spec_files=
-rescue LoadError
+  raise LoadError if ENV['RSPEC1']
   # RSpec 2
   require "rspec/core/rake_task"
   spec_class = RSpec::Core::RakeTask
   spec_files_meth = :pattern=
+rescue LoadError
+  # RSpec 1
+  require "spec/rake/spectask"
+  spec_class = Spec::Rake::SpecTask
+  spec_files_meth = :spec_files=
 end
+
 
 desc "Run specs"
 spec_class.new("spec") do |t|
