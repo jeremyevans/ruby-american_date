@@ -1,6 +1,17 @@
 require File.join(File.dirname(File.dirname(File.expand_path(__FILE__))), 'lib', 'american_date')
 require 'time'
 
+if defined?(RSpec)
+  require 'rspec/version'
+  if RSpec::Version::STRING >= '2.11.0'
+    RSpec.configure do |config|
+      config.expect_with :rspec do |c|
+        c.syntax = :should
+      end
+    end
+  end
+end
+
 describe "Date.parse" do
   specify "should use american date format for dd/mm/yy" do
     Date.parse('01/02/03', true).should == Date.new(2003, 1, 2)
