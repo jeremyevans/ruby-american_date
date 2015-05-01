@@ -4,11 +4,16 @@ rvm:
   - 1.9.2
   - 1.9.3
   - 2.0.0
-  - 2.1.0
+  - 2.1.6
+  - 2.2.2
   - jruby-18mode
   - jruby-19mode
+  - jruby-head
+  - ruby-head
   - rbx-2
 matrix:
   allow_failures:
     - rvm: rbx-2
+    - rvm: jruby-head
+    - rvm: ruby-head
 gemfile: .travis.gemfile
