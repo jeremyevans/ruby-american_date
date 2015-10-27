@@ -22,8 +22,8 @@ if RUBY_VERSION >= '1.9'
       alias parse_without_american_date parse
 
       # Transform american dates into ISO dates before parsing.
-      def parse(string, comp=true)
-        parse_without_american_date(convert_american_to_iso(string), comp)
+      def parse(string, comp=true, start=Date::ITALY)
+        parse_without_american_date(convert_american_to_iso(string), comp, start)
       end
     end
 
@@ -53,8 +53,8 @@ if RUBY_VERSION >= '1.9'
       alias parse_without_american_date parse
 
       # Transform american dates into ISO dates before parsing.
-      def parse(string, comp=true)
-        parse_without_american_date(convert_american_to_iso(string), comp)
+      def parse(string, comp=true, start=DateTime::ITALY)
+        parse_without_american_date(convert_american_to_iso(string), comp, start)
       end
     end
   end
