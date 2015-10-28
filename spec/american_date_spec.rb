@@ -5,6 +5,7 @@ require 'minitest/autorun'
 describe "Date.parse" do
   specify "should use american date format for dd/mm/yy" do
     Date.parse('01/02/03', true).must_equal Date.new(2003, 1, 2)
+    Date.parse('01/02/03', true, Date::ITALY).must_equal Date.new(2003, 1, 2)
   end
 
   specify "should use american date format for d/m/yy" do
@@ -70,6 +71,7 @@ end
 describe "DateTime.parse" do
   specify "should use american date format for dd/mm/yy" do
     DateTime.parse('01/02/03', true).must_equal DateTime.new(2003, 1, 2)
+    DateTime.parse('01/02/03', true, DateTime::ITALY).must_equal DateTime.new(2003, 1, 2)
   end
 
   specify "should use american date format for d/m/yy" do
