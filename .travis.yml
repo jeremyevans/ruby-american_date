@@ -18,3 +18,5 @@ matrix:
     - rvm: jruby-head
     - rvm: ruby-head
 gemfile: .travis.gemfile
+before_install:
+  - gem install bundler
