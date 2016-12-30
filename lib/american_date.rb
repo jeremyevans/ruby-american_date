@@ -12,9 +12,16 @@ if RUBY_VERSION >= '1.9'
     # Alias for stdlib Date._parse
     alias _parse_without_american_date _parse
 
-    # Transform american dates into ISO dates before parsing.
-    def _parse(string, comp=true)
-      _parse_without_american_date(convert_american_to_iso(string), comp)
+    if RUBY_ENGINE == 'rbx'
+      # Transform american dates into ISO dates before parsing.
+      def _parse(string, comp=true, return_bag=false)
+        _parse_without_american_date(convert_american_to_iso(string), comp, return_bag)
+      end
+    else
+      # Transform american dates into ISO dates before parsing.
+      def _parse(string, comp=true)
+        _parse_without_american_date(convert_american_to_iso(string), comp)
+      end
     end
 
     if RUBY_VERSION >= '1.9.3'
