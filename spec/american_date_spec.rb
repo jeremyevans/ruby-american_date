@@ -1,5 +1,6 @@
 require File.join(File.dirname(File.dirname(File.expand_path(__FILE__))), 'lib', 'american_date')
 require 'time'
+require 'rubygems'
 require 'minitest/autorun'
 
 describe "Date.parse" do
