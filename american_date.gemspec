@@ -2,7 +2,6 @@ AMERICAN_DATE_GEMSPEC = Gem::Specification.new do |s|
   s.name = 'american_date'
   s.version = '1.1.1'
   s.platform = Gem::Platform::RUBY
-  s.has_rdoc = true
   s.extra_rdoc_files = ["README.rdoc", "CHANGELOG", "MIT-LICENSE"]
   s.rdoc_options += ["--quiet", '--inline-source', '--line-numbers', '--title', 'american_date: American style month/day/year date parsing for ruby 1.9', '--main', 'README.rdoc']
   s.summary = "American style month/day/year date parsing for ruby 1.9"
