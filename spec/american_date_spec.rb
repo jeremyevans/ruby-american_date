@@ -1,6 +1,7 @@
 require File.join(File.dirname(File.dirname(File.expand_path(__FILE__))), 'lib', 'american_date')
 require 'time'
 require 'rubygems'
+ENV['MT_NO_PLUGINS'] = '1' # Work around stupid autoloading of plugins
 require 'minitest/autorun'
 
 describe "Date.parse" do
