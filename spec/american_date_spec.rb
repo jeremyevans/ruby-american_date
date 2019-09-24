@@ -2,7 +2,8 @@ require File.join(File.dirname(File.dirname(File.expand_path(__FILE__))), 'lib',
 require 'time'
 require 'rubygems'
 ENV['MT_NO_PLUGINS'] = '1' # Work around stupid autoloading of plugins
-require 'minitest/autorun'
+gem 'minitest'
+require 'minitest/global_expectations/autorun'
 
 describe "Date.parse" do
   specify "should use american date format for dd/mm/yy" do
