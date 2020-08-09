@@ -6,6 +6,7 @@ AMERICAN_DATE_GEMSPEC = Gem::Specification.new do |s|
   s.rdoc_options += ["--quiet", '--inline-source', '--line-numbers', '--title', 'american_date: American style month/day/year date parsing for ruby 1.9', '--main', 'README.rdoc']
   s.summary = "American style month/day/year date parsing for ruby 1.9"
   s.description = s.summary
+  s.license = "MIT"
   s.author = "Jeremy Evans"
   s.email = "code@jeremyevans.net"
   s.homepage = "https://github.com/jeremyevans/ruby-american_date"
