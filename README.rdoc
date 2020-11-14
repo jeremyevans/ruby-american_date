@@ -2,7 +2,7 @@
 
 ruby-american_date exists to make ruby 1.9+ parse american-style
 month/day/year dates correctly, with behavior matching ruby 1.8.7.
-It can also be used on earlier ruby version, but it is basically
+It can also be used on earlier ruby versions, but it is basically
 a noop there.
 
 As far as I know, there isn't a gem that already handles this. You
@@ -24,12 +24,6 @@ into a year-month-day ISO format string before passing it to the
 standard date parsing methods.  This is probably the least invasive
 way that works correctly on both the pure-ruby date parser (<1.9.3)
 and the C extension date parser (>=1.9.3).
-
-== Tested ruby versions
-
-* ruby 1.8.6, 1.8.7, 1.9.2, 1.9.3, 2.0.0, 2.1.0
-* rubinius 1.2.4, 2.2.6
-* jruby 1.6.5, 1.7.9 (both --1.8 and --1.9 modes)
 
 == Installation
 
