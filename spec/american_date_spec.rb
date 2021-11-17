@@ -5,6 +5,10 @@ ENV['MT_NO_PLUGINS'] = '1' # Work around stupid autoloading of plugins
 gem 'minitest'
 require 'minitest/global_expectations/autorun'
 
+if RUBY_VERSION >= '2.0'
+  require File.join(File.dirname(File.dirname(File.expand_path(__FILE__))), 'spec', 'american_date_keyword_spec')
+end
+
 describe "Date.parse" do
   specify "should use american date format for dd/mm/yy" do
     Date.parse('01/02/03', true).must_equal Date.new(2003, 1, 2)

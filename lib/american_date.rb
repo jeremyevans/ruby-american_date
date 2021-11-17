@@ -1,8 +1,17 @@
 require 'date'
 
 if RUBY_VERSION >= '1.9'
+  long_date = ' ' * 128 + '2021-10-11'
+  limit_supported = begin
+    Date.parse(long_date)
+  rescue ArgumentError
+    (Date.parse(long_date, true, Date::ITALY, :limit=>nil) == Date.new(2021, 10, 11)) rescue false
+  else
+    false
+  end
+
   # Modify parsing methods to handle american date format correctly.
-  class << Date
+  Date.instance_eval do
     # American date format detected by the library.
     AMERICAN_DATE_RE = eval('%r_(?<!\d)(\d{1,2})/(\d{1,2})/(\d{4}|\d{2})(?!\d)_').freeze
     # Negative lookbehinds, which are not supported in Ruby 1.8
@@ -12,18 +21,34 @@ if RUBY_VERSION >= '1.9'
     # Alias for stdlib Date._parse
     alias _parse_without_american_date _parse
 
-    # Transform american dates into ISO dates before parsing.
-    def _parse(string, comp=true)
-      _parse_without_american_date(convert_american_to_iso(string), comp)
+    if limit_supported
+      instance_eval(<<-END, __FILE__, __LINE__+1)
+        def _parse(string, comp=true, limit: 128)
+          _parse_without_american_date(convert_american_to_iso(string), comp, limit: limit)
+        end
+      END
+    else
+      # Transform american dates into ISO dates before parsing.
+      def _parse(string, comp=true)
+        _parse_without_american_date(convert_american_to_iso(string), comp)
+      end
     end
 
     if RUBY_VERSION >= '1.9.3'
       # Alias for stdlib Date.parse
       alias parse_without_american_date parse
 
-      # Transform american dates into ISO dates before parsing.
-      def parse(string, comp=true, start=Date::ITALY)
-        parse_without_american_date(convert_american_to_iso(string), comp, start)
+      if limit_supported
+        instance_eval(<<-END, __FILE__, __LINE__+1)
+          def parse(string, comp=true, start=Date::ITALY, limit: 128)
+            parse_without_american_date(convert_american_to_iso(string), comp, start, limit: limit)
+          end
+        END
+      else
+        # Transform american dates into ISO dates before parsing.
+        def parse(string, comp=true, start=Date::ITALY)
+          parse_without_american_date(convert_american_to_iso(string), comp, start)
+        end
       end
     end
 
@@ -48,13 +73,21 @@ if RUBY_VERSION >= '1.9'
 
   if RUBY_VERSION >= '1.9.3'
     # Modify parsing methods to handle american date format correctly.
-    class << DateTime
+    DateTime.instance_eval do
       # Alias for stdlib Date.parse
       alias parse_without_american_date parse
 
-      # Transform american dates into ISO dates before parsing.
-      def parse(string, comp=true, start=DateTime::ITALY)
-        parse_without_american_date(convert_american_to_iso(string), comp, start)
+      if limit_supported
+        instance_eval(<<-END, __FILE__, __LINE__+1)
+          def parse(string, comp=true, start=Date::ITALY, limit: 128)
+            parse_without_american_date(convert_american_to_iso(string), comp, start, limit: limit)
+          end
+        END
+      else
+        # Transform american dates into ISO dates before parsing.
+        def parse(string, comp=true, start=Date::ITALY)
+          parse_without_american_date(convert_american_to_iso(string), comp, start)
+        end
       end
     end
   end

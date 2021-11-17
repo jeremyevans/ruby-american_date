@@ -1,3 +1,7 @@
+=== master
+
+* Support the limit keyword argument supported by date 3.2.1+ (jeremyevans)
+
 === 1.1.1 (2015-10-27)
 
 * Support the third argument to Date/DateTime.parse (costi) (#13)
