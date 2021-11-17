@@ -8,6 +8,8 @@ if RUBY_VERSION < '2.4.0'
   gem 'minitest', '5.11.3'
 end
 
-if RUBY_VERSION >= '2.6'
-  gem 'date', '>= 3.2.1'
+platforms :ruby do
+  if RUBY_VERSION >= '2.6'
+    gem 'date', '>= 3.2.1'
+  end
 end
