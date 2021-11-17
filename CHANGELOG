@@ -1,4 +1,4 @@
-=== master
+=== 1.2.0 (2021-11-17)
 
 * Support the limit keyword argument supported by date 3.2.1+ (jeremyevans)
 
