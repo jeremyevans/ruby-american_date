@@ -26,7 +26,7 @@ end
 
 desc "Run specs"
 task :spec do
-  sh "#{FileUtils::RUBY} -I lib spec/american_date_spec.rb"
+  sh "#{FileUtils::RUBY} #{"-w" if RUBY_VERSION >= '3'} -I lib spec/american_date_spec.rb"
 end
 task :default=>[:spec]
 

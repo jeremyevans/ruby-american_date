@@ -1,5 +1,5 @@
 long_date = ' ' * 128 + '01/02/2003'
-limit_supported = begin
+begin
   Date.parse(long_date)
 rescue ArgumentError
 if ((Date.parse(long_date, true, Date::ITALY, :limit=>nil) == Date.new(2003, 1, 2)) rescue false)
