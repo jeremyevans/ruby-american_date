@@ -26,14 +26,14 @@ end
 
 desc "Run specs"
 task :spec do
-  sh "#{FileUtils::RUBY} #{"-w" if RUBY_VERSION >= '3'} -I lib spec/american_date_spec.rb"
+  sh "#{FileUtils::RUBY} #{"-w" if RUBY_VERSION >= '3'} spec/american_date_spec.rb"
 end
 task :default=>[:spec]
 
 desc "Run specs with coverage"
 task :spec_cov do
   ENV['COVERAGE'] = '1'
-  sh "#{FileUtils::RUBY} -I lib spec/american_date_spec.rb"
+  sh "#{FileUtils::RUBY} spec/american_date_spec.rb"
 end
 
 desc "Package american_date"
