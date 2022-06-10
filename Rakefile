@@ -30,6 +30,12 @@ task :spec do
 end
 task :default=>[:spec]
 
+desc "Run specs with coverage"
+task :spec_cov do
+  ENV['COVERAGE'] = '1'
+  sh "#{FileUtils::RUBY} -I lib spec/american_date_spec.rb"
+end
+
 desc "Package american_date"
 task :gem=>[:clean] do
   load './american_date.gemspec'
