@@ -1,3 +1,7 @@
+=== master
+
+* Make sure AMERICAN_DATE_RE constant is defined on Date and not on the top level (jeremyevans)
+
 === 1.2.0 (2021-11-17)
 
 * Support the limit keyword argument supported by date 3.2.1+ (jeremyevans)
