@@ -15,7 +15,7 @@ AMERICAN_DATE_GEMSPEC = Gem::Specification.new do |s|
   s.author = "Jeremy Evans"
   s.email = "code@jeremyevans.net"
   s.homepage = "https://github.com/jeremyevans/ruby-american_date"
-  s.files = %w(MIT-LICENSE CHANGELOG README.rdoc Rakefile) + Dir["{spec,lib}/american_date*.rb"]
+  s.files = %w(MIT-LICENSE CHANGELOG README.rdoc lib/american_date.rb)
   s.add_development_dependency "minitest", '>=5'
   s.add_development_dependency "minitest-global_expectations"
 end
