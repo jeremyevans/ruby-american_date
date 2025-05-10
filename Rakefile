@@ -4,24 +4,26 @@ require "rake/clean"
 CLEAN.include ["*.gem", "rdoc"]
 RDOC_OPTS = ['--inline-source', '--line-numbers', '--title', '', '--main', 'README.rdoc']
 
-rdoc_task_class = begin
-  require "rdoc/task"
-  RDOC_OPTS.concat(['-f', 'hanna'])
-  RDoc::Task
-rescue LoadError
-  begin
-    require "rake/rdoctask"
-    Rake::RDocTask
-  rescue RuntimeError
-  end
-end
+desc "Generate rdoc"
+task :rdoc do
+  rdoc_dir = "rdoc"
+  rdoc_opts = ["--line-numbers", "--inline-source", '--title', 'american_date: parse month/day/year dates']
 
-if rdoc_task_class
-  rdoc_task_class.new do |rdoc|
-    rdoc.rdoc_dir = "rdoc"
-    rdoc.options += RDOC_OPTS
-    rdoc.rdoc_files.add %w"lib/american_date.rb MIT-LICENSE CHANGELOG README.rdoc"
+  begin
+    gem 'hanna'
+    rdoc_opts.concat(['-f', 'hanna'])
+  rescue Gem::LoadError
   end
+
+  rdoc_opts.concat(['--main', 'README.rdoc', "-o", rdoc_dir] +
+    %w"README.rdoc CHANGELOG MIT-LICENSE" +
+    Dir["lib/**/*.rb"]
+  )
+
+  FileUtils.rm_rf(rdoc_dir)
+
+  require "rdoc"
+  RDoc::RDoc.new.document(rdoc_opts)
 end
 
 desc "Run specs"
