@@ -1,17 +1,17 @@
 require 'date'
 
-# :nocov:
+# simplecov:disable
 if RUBY_VERSION >= '1.9'
-# :nocov:
+# simplecov:enable
   long_date = ' ' * 128 + '2021-10-11'
   limit_supported = begin
     Date.parse(long_date)
   rescue ArgumentError
     (Date.parse(long_date, true, Date::ITALY, :limit=>nil) == Date.new(2021, 10, 11)) rescue false
-  # :nocov:
+  # simplecov:disable
   else
     false
-  # :nocov:
+  # simplecov:enable
   end
 
   # American date format detected by the library.
@@ -32,18 +32,18 @@ if RUBY_VERSION >= '1.9'
           _parse_without_american_date(convert_american_to_iso(string), comp, limit: limit)
         end
       END
-    # :nocov:
+    # simplecov:disable
     else
       # Transform american dates into ISO dates before parsing.
       def _parse(string, comp=true)
         _parse_without_american_date(convert_american_to_iso(string), comp)
       end
-    # :nocov:
+    # simplecov:enable
     end
 
-    # :nocov:
+    # simplecov:disable
     if RUBY_VERSION >= '1.9.3'
-    # :nocov:
+    # simplecov:enable
       # Alias for stdlib Date.parse
       alias parse_without_american_date parse
 
@@ -53,14 +53,14 @@ if RUBY_VERSION >= '1.9'
             parse_without_american_date(convert_american_to_iso(string), comp, start, limit: limit)
           end
         END
-      # :nocov:
+      # simplecov:disable
       else
         # Transform american dates into ISO dates before parsing.
         def parse(string, comp=true, start=Date::ITALY)
           parse_without_american_date(convert_american_to_iso(string), comp, start)
         end
       end
-      # :nocov:
+      # simplecov:enable
     end
 
     private
@@ -82,9 +82,9 @@ if RUBY_VERSION >= '1.9'
     end
   end
 
-  # :nocov:
+  # simplecov:disable
   if RUBY_VERSION >= '1.9.3'
-  # :nocov:
+  # simplecov:enable
     # Modify parsing methods to handle american date format correctly.
     DateTime.instance_eval do
       # Alias for stdlib Date.parse
@@ -96,14 +96,14 @@ if RUBY_VERSION >= '1.9'
             parse_without_american_date(convert_american_to_iso(string), comp, start, limit: limit)
           end
         END
-      # :nocov:
+      # simplecov:disable
       else
         # Transform american dates into ISO dates before parsing.
         def parse(string, comp=true, start=Date::ITALY)
           parse_without_american_date(convert_american_to_iso(string), comp, start)
         end
       end
-      # :nocov:
+      # simplecov:enable
     end
   end
 end
